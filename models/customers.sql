@@ -44,4 +44,3 @@ select
     number_of_orders
 from customers_orders 
 order by 4
-limit 5
