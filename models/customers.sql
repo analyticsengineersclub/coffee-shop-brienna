@@ -4,14 +4,14 @@ with customers as (
     select 
         * 
     from 
-        analytics-engineers-club.coffee_shop.customers
+        {{ source('coffee_shop', 'customers') }}
 ),
 
 orders as (
     select 
         *
     from 
-        analytics-engineers-club.coffee_shop.orders
+        {{ source('coffee_shop', 'orders') }}
 ),
 
 orders_per_customer as (

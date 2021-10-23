@@ -22,3 +22,20 @@ models:
         description: The number of customers that placed their first order
         tests: 
           - not_null
+
+sources: 
+  - name: coffee_shop
+    project: analytics-engineers-club
+    tables: 
+      - name: customers 
+        columns: 
+          - name: id 
+            tests: 
+              - unique
+              - not_null
+      - name: orders 
+        columns: 
+          - name: id 
+            tests: 
+              - unique
+              - not_null
