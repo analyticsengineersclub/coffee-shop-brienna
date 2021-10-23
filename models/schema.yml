@@ -1,0 +1,41 @@
+version: 2 
+
+models: 
+  - name: customers
+    description: Details about a customer
+    columns:
+      - name: customer_id 
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - unique
+          - not_null
+
+  - name: customers_monthly
+    description: Aggregated details about customers at the monthly level
+    columns: 
+      - name: first_order_month
+        description: The month in which a new customer placed their first order
+        tests: 
+          - unique
+          - not_null 
+      - name: customer_count
+        description: The number of customers that placed their first order
+        tests: 
+          - not_null
+
+sources: 
+  - name: coffee_shop
+    project: analytics-engineers-club
+    tables: 
+      - name: customers 
+        columns: 
+          - name: id 
+            tests: 
+              - unique
+              - not_null
+      - name: orders 
+        columns: 
+          - name: id 
+            tests: 
+              - unique
+              - not_null
