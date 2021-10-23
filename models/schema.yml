@@ -9,6 +9,10 @@ models:
         tests:
           - unique
           - not_null
+      - name: name 
+        description: Customer name 
+        tests: 
+          - unique
 
   - name: customers_monthly
     description: Aggregated details about customers at the monthly level
