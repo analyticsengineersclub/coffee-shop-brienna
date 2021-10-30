@@ -23,6 +23,17 @@ models:
         tests: 
           - not_null
 
+  - name: pageviews
+    description: Details about a browsing session on the online coffee shop
+    columns:
+      - name: id 
+        description: Session id
+        tests: 
+          - unique
+          - not_null 
+
+
+
 sources: 
   - name: coffee_shop
     project: analytics-engineers-club
@@ -39,3 +50,13 @@ sources:
             tests: 
               - unique
               - not_null
+  - name: web_tracking
+    project: analytics-engineers-club
+    tables: 
+      - name: pageviews
+        columns: 
+          - name: id
+            tests: 
+              - unique
+              - not_null
+        
