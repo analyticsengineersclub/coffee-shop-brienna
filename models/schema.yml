@@ -23,7 +23,7 @@ models:
         tests: 
           - not_null
 
-  - name: pageviews
+  - name: stg_pageviews
     description: Details about a browsing session on the online coffee shop
     columns:
       - name: id 
