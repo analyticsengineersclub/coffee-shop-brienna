@@ -13,7 +13,7 @@ one_visitor_id_per_customer as (
     group by 1
 ),
 
-final as (
+pageviews_deduped as (
     select 
         pageviews.id, 
         one_visitor_id_per_customer.visitor_id, 
@@ -25,6 +25,32 @@ final as (
     left join one_visitor_id_per_customer   
         on pageviews.customer_id = one_visitor_id_per_customer.customer_id
     order by customer_id
+),
+
+pageviews_lagging as (
+    select 
+        *,
+        lag(timestamp, 1) over (partition by customer_id order by timestamp asc) as last_timestamp,
+    from pageviews_deduped
+),
+
+pageviews_flagged as (
+    select 
+        *,
+        if(date_diff(timestamp, last_timestamp, minute) <= 30, 0, 1) as is_new_session
+    from pageviews_lagging
+),
+
+final as (
+    select     
+        id, 
+        visitor_id, 
+        device_type, 
+        timestamp, 
+        page, 
+        customer_id,
+        sum(is_new_session) over (order by customer_id, timestamp) as session_id
+    from pageviews_flagged
 )
 
 select 
