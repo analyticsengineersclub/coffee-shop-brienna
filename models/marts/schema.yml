@@ -1,0 +1,11 @@
+version: 2 
+
+models: 
+  - name: fct_pageviews
+    description: Facts about a browsing session on the online coffee shop
+    columns:
+      - name: id 
+        description: Session id
+        tests: 
+          - unique
+          - not_null 
