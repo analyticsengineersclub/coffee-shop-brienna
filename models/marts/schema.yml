@@ -9,6 +9,12 @@ models:
         tests: 
           - unique
           - not_null 
+      - name: customer_id 
+        tests: 
+          - not_null
+      - name: visitor_id
+        tests: 
+          - not_null
   - name: dim_customers
     description: Details about a customer
     columns: 
