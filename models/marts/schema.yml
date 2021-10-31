@@ -1,0 +1,25 @@
+version: 2 
+
+models: 
+  - name: fct_pageviews
+    description: Facts about a browsing session on the online coffee shop
+    columns:
+      - name: id 
+        description: Session id
+        tests: 
+          - unique
+          - not_null 
+      - name: customer_id 
+        tests: 
+          - not_null
+      - name: visitor_id
+        tests: 
+          - not_null
+  - name: dim_customers
+    description: Details about a customer
+    columns: 
+      - name: customer_id
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - unique
+          - not_null

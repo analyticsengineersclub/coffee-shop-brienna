@@ -1,0 +1,29 @@
+version: 2 
+
+models:   
+  - name: stg_pageviews
+    description: Details about a browsing session on the online coffee shop
+    columns:
+      - name: id 
+        description: Session id
+        tests: 
+          - unique
+          - not_null 
+  - name: stg_customers
+    description: Details about a customer
+    columns:
+      - name: id 
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - unique
+          - not_null
+  - name: stg_orders
+    description: Details about an order
+    columns: 
+      - name: id
+        description: Order id
+        tests: 
+          - unique
+          - not_null
+          
+  
