@@ -9,3 +9,11 @@ models:
         tests: 
           - unique
           - not_null 
+  - name: dim_customers
+    description: Details about a customer
+    columns: 
+      - name: customer_id
+        description: "{{ doc('customer_id') }}"
+        tests:
+          - unique
+          - not_null
