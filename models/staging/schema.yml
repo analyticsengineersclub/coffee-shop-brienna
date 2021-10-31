@@ -12,7 +12,7 @@ models:
   - name: stg_customers
     description: Details about a customer
     columns:
-      - name: customer_id 
+      - name: id 
         description: "{{ doc('customer_id') }}"
         tests:
           - unique
