@@ -1,7 +1,7 @@
 with pageviews as (
     select 
         *
-    from `analytics-engineers-club.web_tracking.pageviews`
+    from {{ ref('stg_pageviews') }}
     where customer_id is not null
 ),
 
@@ -30,5 +30,3 @@ final as (
 select 
     *
 from final
-where customer_id is not null
-order by 2 desc 
