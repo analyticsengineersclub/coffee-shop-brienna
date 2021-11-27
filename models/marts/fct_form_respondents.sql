@@ -1,9 +1,18 @@
 {{ 
-    config(materialized='table') 
+    config(materialized='incremental') 
 }}
 
 with events as (
     select * from {{ ref('stg_form_events') }}
+
+    where timestamp >= ( 
+        select 
+            max(last_form_entry) 
+        from {{ this }} 
+        -- we don't want to use a ref, as this creates a cyclic dependency
+        -- we also don't want to hard code it, e.g. dbt_brienna.fct_form_respondents, 
+        -- cuz then it wouldn't work if someone else is using it
+    )
 ),
 
 aggregated as (
