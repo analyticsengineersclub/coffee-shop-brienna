@@ -5,6 +5,7 @@
 with events as (
     select * from {{ ref('stg_form_events') }}
 
+    {% if is_incremental() %}
     where timestamp >= ( 
         select 
             max(last_form_entry) 
@@ -13,6 +14,7 @@ with events as (
         -- we also don't want to hard code it, e.g. dbt_brienna.fct_form_respondents, 
         -- cuz then it wouldn't work if someone else is using it
     )
+    {% endif %}
 ),
 
 aggregated as (
