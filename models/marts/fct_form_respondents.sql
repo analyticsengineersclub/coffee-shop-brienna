@@ -1,5 +1,8 @@
 {{ 
-    config(materialized='incremental') 
+    config(
+        materialized='incremental',
+        unique_key='github_username' -- prevent duplicates
+    ) 
 }}
 
 with events as (
